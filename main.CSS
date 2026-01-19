@@ -9,24 +9,31 @@
 
 html, body {
   font-family: 'Rajdhani', sans-serif;
-  background: linear-gradient(to bottom, rgba(224,247,255,0.8), rgba(0,31,51,0.9), rgba(0,8,20,0.95)); /* Slightly more transparent background for a lighter, airy feel */
+  background: linear-gradient(to bottom, rgba(224,247,255,0.8), rgba(0,31,51,0.9), rgba(0,8,20,0.95));
   color: #b8f7ff;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
+/* Make main text easier to read */
+section {
+  min-height: 100vh;
+  padding: 100px 10% 80px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 10, 25, 0.75); /* darker overlay behind text */
+}
+
+/* Stronger body text color */
+body, p {
+  color: #e3f9ff;
+}
+
 h1, h2 {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 2px;
-  color: #00ffff;
-  text-shadow: 0 0 20px #00e0ff, 0 0 40px #0066ff;
-}
-
-section {
-  min-height: 100vh;
-  padding: 80px 10%;
-  position: relative;
-  overflow: hidden;
+  color: #ffffff;
+  text-shadow: 0 0 16px #00e0ff, 0 0 32px #0066ff;
 }
 
 /* OCEAN BACKGROUND EFFECT */
@@ -76,7 +83,7 @@ header {
   top: 0;
   left: 0;
   z-index: 10;
-  background: rgba(0, 30, 50, 0.6);
+  background: rgba(0, 30, 50, 0.7);
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: space-between;
@@ -92,17 +99,21 @@ header {
   text-shadow: 0 0 15px #00ffff;
 }
 
+/* Make nav links look clickable */
 nav a {
-  color: #b8f7ff;
+  color: #e3f9ff;
   text-decoration: none;
   margin-left: 25px;
-  transition: 0.3s;
   font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: 0.3s;
 }
 
 nav a:hover {
-  color: #00ffff;
-  text-shadow: 0 0 10px #00ffff;
+  color: #00111a;
+  background: rgba(0, 255, 255, 0.18);
+  text-shadow: 0 0 12px #00ffff;
 }
 
 /* HERO SECTION */
@@ -128,27 +139,29 @@ nav a:hover {
   margin-top: 20px;
   font-size: 1.3rem;
   max-width: 600px;
-  color: #b8f7ff;
-  opacity: 0.9;
+  color: #e3f9ff;
 }
 
+/* Buttons: clear and interactive */
 .btn {
-  margin-top: 40px;
+  margin-top: 30px;
   padding: 15px 40px;
-  border: 2px solid #00ffff;
-  background: rgba(0, 204, 255, 0.1);
-  color: #00ffff;
-  font-size: 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background: #00ffff;
+  color: #00111a;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
-  border-radius: 6px;
-  transition: 0.3s;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
 }
 
 .btn:hover {
-  background: #00ffff;
-  color: #00111a;
-  box-shadow: 0 0 20px #00ffff;
+  background: #b8f7ff;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.9);
+  transform: translateY(-2px) scale(1.02);
 }
 
 /* QUARTER SECTIONS */
@@ -158,7 +171,12 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-top: 1px solid rgba(0,255,255,0.1);
+  border-top: 1px solid rgba(0,255,255,0.4);
+  background: rgba(0, 5, 18, 0.85);
+  border-radius: 16px;
+  margin: 40px auto;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
 .quarter h2 {
@@ -169,7 +187,7 @@ nav a:hover {
 .quarter p {
   max-width: 700px;
   font-size: 1.1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-bottom: 30px;
 }
 
@@ -180,16 +198,20 @@ nav a:hover {
   justify-content: center;
 }
 
+.quarter-buttons .btn {
+  margin-top: 10px;
+}
+
 /* POP-UP MODAL */
 .popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw; /* Responsive width to fit visible area */
-  max-width: 1000px; /* Maximum width for large screens */
-  height: 80vh; /* Responsive height to fit visible area */
-  max-height: 800px; /* Maximum height for large screens */
+  width: 90vw;
+  max-width: 1000px;
+  height: 80vh;
+  max-height: 800px;
   background: rgba(0, 20, 40, 0.95);
   backdrop-filter: blur(10px);
   border: 2px solid #00ffff;
@@ -199,6 +221,8 @@ nav a:hover {
   visibility: hidden;
   z-index: 100;
   overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
 }
 
 .popup.active {
@@ -213,9 +237,14 @@ nav a:hover {
 }
 
 .popup p {
-  color: #b8f7ff;
+  color: #e3f9ff;
   line-height: 1.6;
   font-size: 18px;
+}
+
+/* Make table text readable inside popup */
+.popup table {
+  color: #e3f9ff;
 }
 
 .close-popup {
@@ -247,6 +276,7 @@ nav a:hover {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  gap: 20px;
 }
 
 .member-card {
@@ -263,12 +293,12 @@ nav a:hover {
 }
 
 .member-card img {
-  width: 80px; /* Predefined size for member images */
+  width: 80px;
   height: 80px;
-  border-radius: 50%; /* Circular image template */
-  object-fit: cover; /* Ensures image fits without distortion */
-  margin-bottom: 10px; /* Space between image and text */
-  border: 2px solid #00ffff; /* Cyan border to match theme */
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #00ffff;
 }
 
 .member-card:hover {
@@ -283,7 +313,7 @@ nav a:hover {
 
 .member-card p {
   font-size: 0.9rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .connector {
