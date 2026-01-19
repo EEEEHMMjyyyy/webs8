@@ -1,5 +1,6 @@
 // Bubble generator
 const ocean = document.querySelector('.ocean-bg');
+
 function createBubble() {
   const bubble = document.createElement('div');
   bubble.classList.add('bubble');
@@ -17,7 +18,7 @@ setInterval(createBubble, 400);
 window.addEventListener('scroll', () => {
   const scrollTop = window.pageYOffset;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercent = scrollTop / docHeight;
+  const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
   const oceanBg = document.querySelector('.ocean-bg');
   const startColor = [224, 247, 255]; // #e0f7ff
   const endColor = [0, 8, 20]; // #000814
@@ -52,31 +53,30 @@ function smoothScrollTo(element, duration = 1500) {
   requestAnimationFrame(animation);
 }
 
-// Smooth Scrolling for Navigation Links
+// Smooth Scrolling for Navigation Links and Dive In button
 document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      e.preventDefault(); // Prevent default anchor behavior
-      const targetId = this.getAttribute('href').substring(1); // Get the target section id
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
 
       if (targetSection) {
-        smoothScrollTo(targetSection, 3000); // Even slower scroll for nav links (3 seconds)
+        smoothScrollTo(targetSection, 3000);
       }
     });
   });
 
-  // Smooth Scrolling for "Dive In" Button to Stream Layout Section
   const diveInButton = document.querySelector('#home .btn');
   if (diveInButton) {
     diveInButton.addEventListener('click', function(e) {
-      e.preventDefault(); // Prevent any default behavior if needed
+      e.preventDefault();
       const targetSection = document.getElementById('stream-design');
 
       if (targetSection) {
-        smoothScrollTo(targetSection, 2500); // Even slower for dive in button (2.5 seconds)
+        smoothScrollTo(targetSection, 2500);
       }
     });
   }
@@ -88,26 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const popupId = btn.getAttribute('data-popup');
       const popup = document.getElementById(popupId);
-      popup.classList.add('active');
-
-      // For the stream-design-popup, ensure the image is displayed (already in HTML)
-      if (popupId === 'stream-design-popup') {
-        const img = popup.querySelector('img');
-        if (img) {
-          // Optional: Handle image load if needed
-          img.addEventListener('load', function() {
-            // Image loaded successfully
-          });
-          img.addEventListener('error', function() {
-            // Handle image load error
-            console.error('Failed to load stream layout image.');
-          });
-        }
+      if (popup) {
+        popup.classList.add('active');
       }
     });
   });
 
-  // Close pop-ups
   document.querySelectorAll('.close-popup').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.parentElement.classList.remove('active');
